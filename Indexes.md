@@ -16,6 +16,7 @@ DELETE qsr-discounts
 DELETE qsr-locations
 DELETE qsr-workinghours
 DELETE qsr-labor-hours
+DELETE qsr-employees
 
 Create Indexes back (run this in kibana dev tools)
 
@@ -25,16 +26,33 @@ PUT qsr-orders
     "data": {
       "properties": {
         "paid": {
-            "type": "double"
+          "type": "double"
         },
         "paymentAmount": {
-            "type": "double"
+          "type": "double"
         },
         "nestedTransactionTypes": {
-          "type": "nested"
+          "type": "nested",
+          "properties": {
+            "amount": {
+              "type": "double"
+            },
+            "change": {
+              "type": "double"
+            },
+            "paid": {
+              "type": "double"
+            },
+            "tenderedAmount": {
+              "type": "double"
+            },
+            "tip": {
+              "type": "double"
+            }          
+          }
         },
         "paymentSubTotal": {
-           "type": "double"
+          "type": "double"
         },
         "paymentTotalDiscount": {
           "type": "double"
@@ -59,9 +77,6 @@ PUT qsr-orders
         },
         "totalTax": {
           "type": "double"
-        },
-        "customItemsValue": {
-          "type": "double"
         }
       }
     }
@@ -72,13 +87,101 @@ PUT qsr-orders-products
   "mappings": {
     "data": {
       "properties": {
+        "discount": {
+          "type": "double"
+        },
+        "nestedTransactionTypes": {
+          "type": "nested",
+          "properties": {
+            "amount": {
+              "type": "double"
+            },
+            "change": {
+              "type": "double"
+            },
+            "paid": {
+              "type": "double"
+            },
+            "tenderedAmount": {
+              "type": "double"
+            },
+            "tip": {
+              "type": "double"
+            }          
+          }
+        },
+        "otherTips": {
+          "type": "double"
+        },
         "paid": {
           "type": "double"
         },
-        "tips": {
+        "paymentAmount": {
           "type": "double"
         },
-        "discount": {
+        "product": {
+          "properties": {
+            "categories": {
+              "properties": {
+                "amount": {
+                  "type": "double"
+                },
+                "subamount": {
+                  "type": "double"
+                },
+                "totalCustomizationPrice": {
+                  "type": "double"
+                }
+              }
+            },
+            "category": {
+              "properties": {
+                "amount": {
+                  "type": "double"
+                },
+                "subamount": {
+                  "type": "double"
+                },
+                "totalCustomizationPrice": {
+                  "type": "double"
+                }
+              }
+            },
+            "main_category": {
+              "properties": {
+                "amount": {
+                  "type": "double"
+                },
+                "subamount": {
+                  "type": "double"
+                },
+                "totalCustomizationPrice": {
+                  "type": "double"
+                }
+              }
+            },
+            "price": {
+              "type": "double"
+            },
+            "variants": {
+              "properties": {
+                "calculatedDiscount": {
+                  "type": "double"
+                },
+                "calculatedPrice": {
+                  "type": "double"
+                },
+                "customizationPrice": {
+                  "type": "double"
+                },
+                "unitPrice": {
+                  "type": "double"
+                }
+              }
+            }
+          }
+        },
+        "tips": {
           "type": "double"
         },
         "total": {
@@ -121,34 +224,33 @@ PUT qsr-labor-sales
     }
   }
 }
-GET qsr-comps
 PUT qsr-comps
 {
   "mappings": {
     "data": {
       "properties": {
         "amount": {
-          "type": "float"
+          "type": "double"
         },
         "customers": {
           "properties": {
             "creditAmount": {
-              "type": "float"
+              "type": "double"
             },
             "discountPercent": {
-              "type": "float"
+              "type": "double"
             }
           }
         },
         "discount": {
           "properties": {
             "value": {
-              "type": "float"
+              "type": "double"
             }
           }
         },
         "paymentAmount": {
-          "type": "float"
+          "type": "double"
         }
       }
     }
@@ -190,3 +292,4 @@ PUT qsr-labor-hours
       }
     }
   }
+}
