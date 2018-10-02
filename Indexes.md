@@ -59,6 +59,9 @@ PUT qsr-orders
         },
         "totalTax": {
           "type": "double"
+        },
+        "customItemsValue": {
+          "type": "double"
         }
       }
     }
