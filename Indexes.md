@@ -1,3 +1,8 @@
+Redo cron
+crontab -l > cron-backup.txt
+crontab -r
+crontab cron-backup.txt
+
 Clean data from Elasticsearch (run this in kibana dev tools)
 DELETE qsr-orders
 DELETE qsr-orders-products
@@ -25,6 +30,9 @@ PUT qsr-orders
   "mappings": {
     "data": {
       "properties": {
+       "customItemsValue": {
+					"type": "double"
+				},
         "paid": {
           "type": "double"
         },
