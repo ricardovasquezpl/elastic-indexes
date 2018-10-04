@@ -31,8 +31,8 @@ PUT qsr-orders
     "data": {
       "properties": {
        "customItemsValue": {
-	  "type": "double"
-	},
+					"type": "double"
+				},
         "paid": {
           "type": "double"
         },
@@ -46,6 +46,9 @@ PUT qsr-orders
               "type": "double"
             },
             "change": {
+              "type": "double"
+            },
+            "grossAmount": {
               "type": "double"
             },
             "paid": {
